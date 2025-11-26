@@ -157,6 +157,8 @@ public class AdminServlet extends HttpServlet {
     private void showDashboard(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("activePage", "dashboard");
+
         // Thống kê tổng quan
         int totalArticles = articleDAO.countAll();
         int totalUsers = userDAO.countAll();
@@ -177,6 +179,8 @@ public class AdminServlet extends HttpServlet {
     private void showArticlesManagement(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("activePage", "articles");
+
         String statusFilter = request.getParameter("status");
         List<Article> articles;
 
@@ -196,6 +200,8 @@ public class AdminServlet extends HttpServlet {
     private void showRemoveRequests(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("activePage", "remove-requests");
+
         List<Article> removeRequests = articleDAO.findRemovePending();
         request.setAttribute("removeRequests", removeRequests);
         request.getRequestDispatcher("/WEB-INF/views/admin/remove-requests.jsp").forward(request, response);
@@ -204,6 +210,8 @@ public class AdminServlet extends HttpServlet {
     // Quản lý người dùng
     private void showUsersManagement(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        request.setAttribute("activePage", "users");
 
         List<User> users = userDAO.findAll();
         request.setAttribute("users", users);
@@ -214,6 +222,8 @@ public class AdminServlet extends HttpServlet {
     private void showCleanupUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("activePage", "users");
+
         List<User> inactiveUsers = userDAO.findInactiveUsers(2); // 2 tháng
         request.setAttribute("inactiveUsers", inactiveUsers);
         request.getRequestDispatcher("/WEB-INF/views/admin/cleanup-users.jsp").forward(request, response);
@@ -223,6 +233,8 @@ public class AdminServlet extends HttpServlet {
     private void showCategoriesManagement(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("activePage", "categories");
+
         List<Category> categories = categoryDAO.findAll();
         request.setAttribute("categories", categories);
         request.getRequestDispatcher("/WEB-INF/views/admin/categories.jsp").forward(request, response);
@@ -231,6 +243,8 @@ public class AdminServlet extends HttpServlet {
     // Hiển thị form sửa category
     private void showEditCategory(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        request.setAttribute("activePage", "categories");
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
