@@ -87,7 +87,7 @@
                             <div class="card-body">
                                 <span class="badge bg-secondary mb-2">${a.categoryName}</span>
                                 <h5 class="card-title">
-                                    <a href="#" class="text-decoration-none text-dark">${a.title}</a>
+                                    <a href="${pageContext.request.contextPath}/article-detail?id=${a.id}" class="text-decoration-none text-dark">${a.title}</a>
                                 </h5>
                                 <p class="card-text text-muted small">${a.shortDescription}</p>
                             </div>

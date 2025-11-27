@@ -119,7 +119,7 @@ public class ArticleServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Category> categories = categoryDAO.findAll();
         request.setAttribute("categories", categories);
-        request.getRequestDispatcher("/WEB-INF/views/user/write-article.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/user/write-article.jsp").forward(request, response);
     }
 
     // Hiển thị trang chỉnh sửa bài viết
@@ -137,7 +137,7 @@ public class ArticleServlet extends HttpServlet {
             // Kiểm tra có được phép sửa không (DRAFT, PENDING, REJECTED)
             if (!articleDAO.canEdit(articleId, currentUser.getId())) {
                 request.setAttribute("error", "Bài viết đã PUBLISHED, không thể sửa!");
-                request.getRequestDispatcher("/WEB-INF/views/user/my-articles.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/web/user/my-articles.jsp").forward(request, response);
                 return;
             }
 
@@ -146,7 +146,7 @@ public class ArticleServlet extends HttpServlet {
 
             request.setAttribute("article", article);
             request.setAttribute("categories", categories);
-            request.getRequestDispatcher("/WEB-INF/views/user/edit-article.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/web/user/edit-article.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID không hợp lệ");
@@ -158,7 +158,7 @@ public class ArticleServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Article> myArticles = articleDAO.findByAuthor(currentUser.getId());
         request.setAttribute("myArticles", myArticles);
-        request.getRequestDispatcher("/WEB-INF/views/user/my-articles.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/web/user/my-articles.jsp").forward(request, response);
     }
 
     // Xóa bài viết
@@ -211,7 +211,7 @@ public class ArticleServlet extends HttpServlet {
 
             Article article = articleDAO.findById(articleId);
             request.setAttribute("article", article);
-            request.getRequestDispatcher("/WEB-INF/views/user/request-remove.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/web/user/request-remove.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID không hợp lệ");
